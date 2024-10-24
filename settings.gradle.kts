@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "TaskMatrix"
 include(":app")
- 
+include(":data")
