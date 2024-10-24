@@ -3,6 +3,7 @@ package com.example.data.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.domain.model.Task
 import java.util.Date
 
 @Entity(tableName = "tasks")
@@ -22,4 +23,6 @@ data class TaskEntity(
     val urgent: Boolean = true,
     @ColumnInfo
     val important: Boolean = true
-)
+) {
+    fun mapToDomain() = Task(id, title, description, date, deadline, urgent, important)
+}
