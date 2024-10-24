@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.taskmatrix"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -58,6 +58,10 @@ dependencies {
 
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
+
+    implementation ("com.maxkeppeler.sheets-compose-dialogs:core:1.0.2")
+    implementation ("com.maxkeppeler.sheets-compose-dialogs:calendar:1.0.2")
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
