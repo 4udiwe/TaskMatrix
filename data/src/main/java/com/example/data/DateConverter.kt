@@ -1,8 +1,10 @@
 package com.example.data
 
+import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 import java.util.Date
 
+@ProvidedTypeConverter
 class DateConverter {
     @TypeConverter
     fun fromTimestamp(value: Long?): Date? {
