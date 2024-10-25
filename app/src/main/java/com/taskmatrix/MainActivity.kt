@@ -133,7 +133,7 @@ fun MainScreen(
             modifier = Modifier.fillMaxHeight(0.25f),
             tasks = list.filter { it.urgent && it.important },
             today = today,
-            title = "Urgent & important",
+            title = stringResource(R.string.urgent_and_important),
             titleColor = colorResource(id = R.color.red),
             onClickTaskInfo = { task ->
                 currentTask.value = task
@@ -144,7 +144,7 @@ fun MainScreen(
             modifier = Modifier.fillMaxHeight(0.33f),
             tasks = list.filter { it.urgent && !it.important },
             today = today,
-            title = "Urgent but not important",
+            title = stringResource(R.string.urgent_but_not_important),
             titleColor = colorResource(id = R.color.green),
             onClickTaskInfo = { task ->
                 currentTask.value = task
@@ -155,7 +155,7 @@ fun MainScreen(
             modifier = Modifier.fillMaxHeight(0.5f),
             tasks = list.filter { !it.urgent && it.important },
             today = today,
-            title = "Not urgent but important",
+            title = stringResource(R.string.not_urgent_but_important),
             titleColor = colorResource(id = R.color.yellow),
             onClickTaskInfo = { task ->
                 currentTask.value = task
@@ -166,7 +166,7 @@ fun MainScreen(
             modifier = Modifier.fillMaxHeight(),
             tasks = list.filter { !it.urgent && !it.important },
             today = today,
-            title = "Nor urgent neither important",
+            title = stringResource(R.string.nor_urgent_neither_important),
             titleColor = colorResource(id = R.color.lightGray),
             onClickTaskInfo = { task ->
                 currentTask.value = task
@@ -230,7 +230,7 @@ fun MatrixCard(
                             Row(
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Text(text = "in $daysRemaining d.")
+                                Text(text = stringResource(R.string.in_d, daysRemaining))
                                 Icon(
                                     painter = painterResource(id = R.drawable.circle),
                                     contentDescription = "circle",
@@ -252,7 +252,7 @@ fun MatrixCard(
                     .padding(30.dp),
                 contentAlignment = Alignment.Center
             ) {
-                Text(text = "Empty yet...", color = colorResource(id = R.color.lightGray))
+                Text(text = stringResource(R.string.empty_yet), color = colorResource(id = R.color.lightGray))
             }
         }
     }
@@ -297,17 +297,17 @@ fun AddTaskDialog(
                 )
                 dialogState.value = false
             }) {
-                Text(text = "Add")
+                Text(text = stringResource(R.string.add))
             }
         },
         dismissButton = {
             TextButton(onClick = {
                 dialogState.value = false
             }) {
-                Text(text = "Cancel")
+                Text(text = stringResource(R.string.cancel))
             }
         },
-        title = { Text(text = "Add new task") },
+        title = { Text(text = stringResource(R.string.add_new_task)) },
         text = {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -316,13 +316,13 @@ fun AddTaskDialog(
                     modifier = Modifier.padding(vertical = 4.dp),
                     value = title.value,
                     onValueChange = { title.value = it },
-                    label = { Text(text = "Title") }
+                    label = { Text(text = stringResource(R.string.title)) }
                 )
                 if (!addingDescription.value) {
                     TextButton(onClick = { addingDescription.value = true }) {
                         Text(
                             modifier = Modifier.padding(vertical = 4.dp),
-                            text = "Add description"
+                            text = stringResource(R.string.add_description)
                         )
                     }
                 } else {
@@ -336,7 +336,7 @@ fun AddTaskDialog(
                                 .fillMaxWidth(0.85f),
                             value = description.value,
                             onValueChange = { description.value = it },
-                            label = { Text(text = "Description") }
+                            label = { Text(text = stringResource(R.string.description)) }
                         )
                         IconButton(onClick = { addingDescription.value = false }) {
                             Icon(imageVector = Icons.Default.Close, contentDescription = "remove")
@@ -350,7 +350,7 @@ fun AddTaskDialog(
                     }) {
                         Text(
                             modifier = Modifier.padding(vertical = 4.dp),
-                            text = "Add deadline"
+                            text = stringResource(R.string.add_deadline)
                         )
                     }
                 } else {
@@ -363,7 +363,7 @@ fun AddTaskDialog(
                         Text(
                             text =
                             if (date == null) ""
-                            else "Deadline: ${date.date}.${date.month + 1}",
+                            else stringResource(R.string.deadline, date.date, date.month + 1),
                             modifier = Modifier
                                 .fillMaxWidth(0.85f)
                                 .padding(start = 16.dp)
@@ -392,7 +392,7 @@ fun AddTaskDialog(
                             contentColor = Color.Gray
                         )
                     ) {
-                        Text(text = "Is urgent?")
+                        Text(text = stringResource(R.string.is_urgent))
                     }
                     TextButton(
                         onClick = { isImportant.value = !isImportant.value },
@@ -405,7 +405,7 @@ fun AddTaskDialog(
                             contentColor = Color.Gray
                         )
                     ) {
-                        Text(text = "Is important?")
+                        Text(text = stringResource(R.string.is_important))
                     }
                 }
             }
@@ -429,16 +429,16 @@ fun TaskCard(
     val statusColor: Color
 
     if (task.urgent && task.important) {
-        status = "Urgent and important"
+        status = stringResource(id = R.string.urgent_and_important)
         statusColor = colorResource(id = R.color.red)
     } else if (task.urgent) {
-        status = "Urgent"
+        status = stringResource(id = R.string.urgent_but_not_important)
         statusColor = colorResource(id = R.color.green)
     } else if (task.important) {
-        status = "Important"
+        status = stringResource(id = R.string.not_urgent_but_important)
         statusColor = colorResource(id = R.color.yellow)
     } else {
-        status = "nor urgent neither important"
+        status = stringResource(id = R.string.nor_urgent_neither_important)
         statusColor = colorResource(id = R.color.lightGray)
     }
 
@@ -452,7 +452,7 @@ fun TaskCard(
                 }
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(text = "Mark as done", color = Color.DarkGray)
+                    Text(text = stringResource(R.string.mark_as_done), color = Color.DarkGray)
                     Icon(
                         modifier = Modifier
                             .padding(start = 4.dp)
@@ -467,7 +467,7 @@ fun TaskCard(
         dismissButton = {
             TextButton(
                 onClick = { cardState.value = false }) {
-                Text(text = "Cancel", color = Color.DarkGray)
+                Text(text = stringResource(id = R.string.cancel), color = Color.DarkGray)
             }
         },
         title = {
@@ -475,7 +475,7 @@ fun TaskCard(
                 Text(text = task.title, color = Color.DarkGray)
                 Text(text = status, fontSize = 14.sp, color = statusColor)
                 Text(
-                    text = "Made at: ${task.date.toString().dropLast(12)}",
+                    text = stringResource(R.string.made_at, task.date.toString().dropLast(12)),
                     color = colorResource(
                         id = R.color.lightGray
                     ),
@@ -497,7 +497,10 @@ fun TaskCard(
                                     color = colorResource(id = R.color.deadline)
                                 ), shape = RoundedCornerShape(8.dp)
                             )
-                            .padding(4.dp), text = "Deadline: ${task.deadline.toString().dropLast(18)}"
+                            .padding(4.dp), text = stringResource(
+                            R.string.deadline_in,
+                            task.deadline.toString().dropLast(18)
+                        )
                     )
                 }
             }

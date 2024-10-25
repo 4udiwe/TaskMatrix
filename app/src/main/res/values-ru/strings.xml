@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TaskMatrix</string>
+    <string name="urgent_and_important">Срочно и важно</string>
+    <string name="urgent_but_not_important">Срочно, но не важно</string>
+    <string name="not_urgent_but_important">Не срочно, но важно</string>
+    <string name="nor_urgent_neither_important">Не срочно и не важно</string>
+    <string name="in_d">через %1$s д.</string>
+    <string name="empty_yet">Пока пусто…</string>
+    <string name="add">Добавить</string>
+    <string name="cancel">Отмена</string>
+    <string name="add_new_task">Добавить новую задачу</string>
+    <string name="title">Задача</string>
+    <string name="add_description">Добавить описание</string>
+    <string name="description">Описание</string>
+    <string name="add_deadline">Добавить дедлайн</string>
+    <string name="deadline">Дедлайн: %1$s.%2$s</string>
+    <string name="is_urgent">Срочно?</string>
+    <string name="is_important">Важно?</string>
+    <string name="mark_as_done">Отметить выполненным</string>
+    <string name="made_at">Создано: %1$s</string>
+    <string name="deadline_in">Дедлайн: %1$s</string>
+</resources>
