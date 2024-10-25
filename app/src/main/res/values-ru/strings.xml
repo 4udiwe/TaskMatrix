@@ -20,4 +20,8 @@
     <string name="mark_as_done">Отметить выполненным</string>
     <string name="made_at">Создано: %1$s</string>
     <string name="deadline_in">Дедлайн: %1$s</string>
+    <string name="see_completed_tasks">Посмотреть выполненные задачи</string>
+    <string name="here_you_can_find_all_done_tasks">Здесь вы можете увидеть все задачи, которые вы отметили как выполненные</string>
+    <string name="drop_all_tasks">Сбросить все задачи</string>
+    <string name="drops_all_tasks">Сбрасывает все текущие и выполненные задачи</string>
 </resources>
