@@ -7,4 +7,17 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="yellow">#DACC54</color>
+    <color name="red">#E85B50</color>
+    <color name="green">#67DF6C</color>
+    <color name="lightGray">#858585</color>
+
+    <color name="farDeadline">#E95EFF00</color>
+    <color name="midDeadline">#E4C815</color>
+    <color name="closeDeadline">#E9FF9900</color>
+    <color name="deadline">#E9FF0900</color>
+
+
+
 </resources>
