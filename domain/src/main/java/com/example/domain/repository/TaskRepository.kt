@@ -5,9 +5,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface TaskRepository {
     suspend fun addTask(newTask: Task)
-    suspend fun deleteTask(task: Task)
+    suspend fun markCompleted(task: Task)
     fun getAllCurrentTasks() : Flow<List<Task>>
     fun getAllCompletedTasks() : Flow<List<Task>>
-    fun deleteAllTasks()
-    fun deleteCompletedTasks()
+    suspend fun deleteAllTasks()
+    suspend fun deleteCompletedTasks()
 }

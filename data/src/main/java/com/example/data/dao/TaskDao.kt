@@ -12,14 +12,12 @@ import kotlinx.coroutines.flow.Flow
 interface TaskDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addTask(task: TaskEntity)
-    @Delete
-    suspend fun deleteTask(task: TaskEntity)
     @Query("SELECT * FROM tasks WHERE isCompleted == 0")
     fun allCurrent() : Flow<List<TaskEntity>>
     @Query("SELECT * FROM tasks WHERE isCompleted == 1")
     fun allCompleted() : Flow<List<TaskEntity>>
     @Query("DELETE FROM tasks")
-    fun deleteAll()
+    suspend fun deleteAll()
     @Query("DELETE FROM tasks WHERE isCompleted == 1")
-    fun deleteCompleted()
+    suspend fun deleteCompleted()
 }

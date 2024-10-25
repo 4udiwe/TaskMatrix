@@ -1,18 +1,18 @@
 package com.taskmatrix.di
 
 import com.example.domain.usecase.AddTaskUseCase
-import com.example.domain.usecase.DeleteTaskUseCase
-import com.example.domain.usecase.GetAllTasksUseCase
+import com.example.domain.usecase.MarkTaskCompletedUseCase
+import com.example.domain.usecase.GetAllCurrentTasksUseCase
 import org.koin.dsl.module
 
 val domainModule = module{
     factory<AddTaskUseCase>{
         AddTaskUseCase(repository = get())
     }
-    factory<DeleteTaskUseCase>{
-        DeleteTaskUseCase(repository = get())
+    factory<MarkTaskCompletedUseCase>{
+        MarkTaskCompletedUseCase(repository = get())
     }
-    factory<GetAllTasksUseCase>{
-        GetAllTasksUseCase(repository = get())
+    factory<GetAllCurrentTasksUseCase>{
+        GetAllCurrentTasksUseCase(repository = get())
     }
 }

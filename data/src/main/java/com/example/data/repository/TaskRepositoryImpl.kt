@@ -18,12 +18,13 @@ class TaskRepositoryImpl(
             newTask.date,
             newTask.deadline,
             newTask.urgent,
-            newTask.important
+            newTask.important,
+            newTask.isCompleted
         )
         taskDao.addTask(newTaskEntity)
     }
 
-    override suspend fun deleteTask(task: Task) {
+    override suspend fun markCompleted(task: Task) {
         val newTaskEntity = TaskEntity(
             task.id,
             task.title,
@@ -31,9 +32,9 @@ class TaskRepositoryImpl(
             task.date,
             task.deadline,
             task.urgent,
-            task.important
+            isCompleted = true
         )
-        taskDao.deleteTask(newTaskEntity)
+        taskDao.addTask(newTaskEntity)
     }
 
     override fun getAllCurrentTasks(): Flow<List<Task>> {
@@ -52,11 +53,11 @@ class TaskRepositoryImpl(
         }
     }
 
-    override fun deleteAllTasks() {
+    override suspend fun deleteAllTasks() {
         taskDao.deleteAll()
     }
 
-    override fun deleteCompletedTasks() {
+    override suspend fun deleteCompletedTasks() {
         taskDao.deleteCompleted()
     }
 }

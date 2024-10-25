@@ -2,8 +2,8 @@ package com.example.domain.usecase
 
 import com.example.domain.repository.TaskRepository
 
-class GetAllTasksUseCase(
+class DeleteCompletedTasksUseCase(
     private val repository: TaskRepository
 ) {
-    fun execute() = repository.getAllCurrentTasks()
+    suspend fun execute() = repository.deleteCompletedTasks()
 }

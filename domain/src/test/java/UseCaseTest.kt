@@ -2,8 +2,8 @@
 import com.example.domain.model.Task
 import com.example.domain.repository.TaskRepository
 import com.example.domain.usecase.AddTaskUseCase
-import com.example.domain.usecase.DeleteTaskUseCase
-import com.example.domain.usecase.GetAllTasksUseCase
+import com.example.domain.usecase.MarkTaskCompletedUseCase
+import com.example.domain.usecase.GetAllCurrentTasksUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
@@ -32,17 +32,17 @@ class UseCaseTest {
     }
     @Test
     fun `should invoke delete method`(){
-        val useCase = DeleteTaskUseCase(repository)
+        val useCase = MarkTaskCompletedUseCase(repository)
 
         val testTask = Task(title = "testTask title")
         runBlocking {
             useCase.execute(task = testTask)
-            Mockito.verify(repository, times(1)).deleteTask(testTask)
+            Mockito.verify(repository, times(1)).markCompleted(testTask)
         }
     }
     @Test
     fun `should receive all tasks`(){
-        val useCase = GetAllTasksUseCase(repository)
+        val useCase = GetAllCurrentTasksUseCase(repository)
 
         val expected = flowOf(
             listOf(
