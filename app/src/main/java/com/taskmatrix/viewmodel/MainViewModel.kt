@@ -1,4 +1,4 @@
-package com.taskmatrix
+package com.taskmatrix.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(
     private val addTask: AddTaskUseCase,
-    private val deleteTask: MarkTaskCompletedUseCase,
+    private val markCompleted: MarkTaskCompletedUseCase,
     getTasks: GetAllCurrentTasksUseCase
 ) : ViewModel() {
 
@@ -21,7 +21,7 @@ class MainViewModel(
     }
 
     fun deleteTask(task: Task) = viewModelScope.launch {
-        deleteTask.execute(task = task)
+        markCompleted.execute(task = task)
     }
 
 }

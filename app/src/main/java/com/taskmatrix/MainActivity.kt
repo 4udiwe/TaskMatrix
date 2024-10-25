@@ -20,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import com.taskmatrix.ui.screens.AddTaskDialog
 import com.taskmatrix.ui.screens.MainScreen
 import com.taskmatrix.ui.theme.TaskMatrixTheme
+import com.taskmatrix.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.Date
 

@@ -48,7 +48,7 @@ import com.example.domain.model.Task
 import com.maxkeppeker.sheets.core.models.base.rememberSheetState
 import com.maxkeppeler.sheets.calendar.CalendarDialog
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
-import com.taskmatrix.MainViewModel
+import com.taskmatrix.viewmodel.MainViewModel
 import com.taskmatrix.R
 import java.time.Duration
 import java.time.LocalDate

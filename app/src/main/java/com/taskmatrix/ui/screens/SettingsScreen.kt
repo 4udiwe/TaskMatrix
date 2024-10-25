@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -25,24 +26,27 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.domain.model.Task
 import com.taskmatrix.R
+import com.taskmatrix.viewmodel.SettingsViewModel
 
-@Preview(showSystemUi = true)
+
 @Composable
-fun SettingsScreen() {
+fun SettingsScreen(
+    viewModel: SettingsViewModel
+) {
 
     val dropDialogState = remember { mutableStateOf(false) }
     val completedDialogState = remember { mutableStateOf(false) }
 
     if (dropDialogState.value)
-        DropTasksAlertDialog(dialogState = dropDialogState)
+        DropTasksAlertDialog(viewModel = viewModel, dialogState = dropDialogState)
 
+    val completedTasks = viewModel.completedTasks.collectAsState(initial = emptyList()).value
     if (completedDialogState.value)
-//        ComlpetedTasksDialog(dialogState = dropDialogState, )
+        ComlpetedTasksDialog(viewModel = viewModel, dialogState = dropDialogState, list = completedTasks)
 
     Column(
         modifier = Modifier.fillMaxSize()
@@ -87,6 +91,7 @@ fun SettingsScreen() {
 
 @Composable
 fun ComlpetedTasksDialog(
+    viewModel: SettingsViewModel,
     dialogState: MutableState<Boolean>,
     list: List<Task>
 ) {
@@ -104,7 +109,7 @@ fun ComlpetedTasksDialog(
             TextButton(
                 onClick = { dialogState.value = false }
             ) {
-                // TODO: сделать удаление всех комплитед тасков
+                viewModel.deleteCompleted()
                 Text(text = "Clear all", color = Color.DarkGray)
             }
         },
@@ -163,6 +168,7 @@ fun ComlpetedTasksDialog(
 
 @Composable
 fun DropTasksAlertDialog(
+    viewModel: SettingsViewModel,
     dialogState: MutableState<Boolean>
 ) {
     AlertDialog(
@@ -177,7 +183,7 @@ fun DropTasksAlertDialog(
         dismissButton = {
             TextButton(
                 onClick = {
-                    // TODO: удаление всей бд
+                    viewModel.deleteAll()
                     dialogState.value = false
                 }
             ) {
