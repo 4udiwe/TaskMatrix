@@ -7,7 +7,7 @@ import com.example.data.dao.TaskDao
 import com.example.data.model.TaskEntity
 
 @Database(
-    version = 1,
+    version = 2,
     entities = [TaskEntity::class]
 )
 @TypeConverters(DateConverter::class)

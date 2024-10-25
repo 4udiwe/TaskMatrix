@@ -36,11 +36,27 @@ class TaskRepositoryImpl(
         taskDao.deleteTask(newTaskEntity)
     }
 
-    override fun getAllTasks(): Flow<List<Task>> {
-        return taskDao.all().map { list ->
+    override fun getAllCurrentTasks(): Flow<List<Task>> {
+        return taskDao.allCurrent().map { list ->
             list.map { taskEntity ->
                 taskEntity.mapToDomain()
             }
         }
+    }
+
+    override fun getAllCompletedTasks(): Flow<List<Task>> {
+        return taskDao.allCompleted().map { list ->
+            list.map { taskEntity ->
+                taskEntity.mapToDomain()
+            }
+        }
+    }
+
+    override fun deleteAllTasks() {
+        taskDao.deleteAll()
+    }
+
+    override fun deleteCompletedTasks() {
+        taskDao.deleteCompleted()
     }
 }

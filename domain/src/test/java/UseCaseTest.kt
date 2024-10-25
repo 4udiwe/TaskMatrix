@@ -53,7 +53,7 @@ class UseCaseTest {
                 Task(title = "testTask title 5")
             )
         )
-        Mockito.`when`(repository.getAllTasks()).thenReturn(expected)
+        Mockito.`when`(repository.getAllCurrentTasks()).thenReturn(expected)
 
         val actual: Flow<List<Task>>
 
@@ -61,6 +61,6 @@ class UseCaseTest {
             actual = useCase.execute()
         }
         Assertions.assertEquals(expected, actual)
-        Mockito.verify(repository, times(1)).getAllTasks()
+        Mockito.verify(repository, times(1)).getAllCurrentTasks()
     }
 }
