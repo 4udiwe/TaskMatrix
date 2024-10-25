@@ -475,7 +475,7 @@ fun TaskCard(
                 Text(text = task.title, color = Color.DarkGray)
                 Text(text = status, fontSize = 14.sp, color = statusColor)
                 Text(
-                    text = stringResource(R.string.made_at, task.date.toString().dropLast(12)),
+                    text = stringResource(R.string.made_at, task.date.toString().take(16)),
                     color = colorResource(
                         id = R.color.lightGray
                     ),
@@ -499,7 +499,7 @@ fun TaskCard(
                             )
                             .padding(4.dp), text = stringResource(
                             R.string.deadline_in,
-                            task.deadline.toString().dropLast(18)
+                            task.deadline.toString().take(10)
                         )
                     )
                 }
