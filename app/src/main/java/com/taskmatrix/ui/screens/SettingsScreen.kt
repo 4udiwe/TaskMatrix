@@ -132,9 +132,9 @@ fun CompletedTasksDialog(
                                 val statusColor =
                                     if (task.urgent && task.important)
                                         colorResource(id = R.color.red)
-                                    else if (task.urgent && !task.important)
+                                    else if (task.urgent)
                                         colorResource(id = R.color.green)
-                                    else if (!task.urgent && task.important)
+                                    else if (task.important)
                                         colorResource(id = R.color.yellow)
                                     else
                                         colorResource(id = R.color.lightGray)
