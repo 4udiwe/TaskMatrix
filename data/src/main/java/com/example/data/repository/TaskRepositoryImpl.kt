@@ -32,6 +32,7 @@ class TaskRepositoryImpl(
             task.date,
             task.deadline,
             task.urgent,
+            task.important,
             isCompleted = true
         )
         taskDao.addTask(newTaskEntity)
