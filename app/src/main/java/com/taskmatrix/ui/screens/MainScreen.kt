@@ -425,7 +425,7 @@ fun TaskCard(
                 Text(text = task.title, color = Color.DarkGray)
                 Text(text = status, fontSize = 14.sp, color = statusColor)
                 Text(
-                    text = stringResource(R.string.made_at, task.date.toString().take(16)),
+                    text = stringResource(R.string.made_at_date_time, task.date.toString().take(16)),
                     color = colorResource(
                         id = R.color.lightGray
                     ),

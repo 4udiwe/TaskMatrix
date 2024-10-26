@@ -17,10 +17,18 @@
     <string name="is_urgent">Is urgent?</string>
     <string name="is_important">Is important?</string>
     <string name="mark_as_done">Mark as done</string>
-    <string name="made_at">Made at: %1$s</string>
+    <string name="made_at_date_time">Made at: %1$s</string>
     <string name="deadline_in">Deadline: %1$s</string>
     <string name="see_completed_tasks">See completed tasks</string>
     <string name="here_you_can_find_all_done_tasks">Here you can find all tasks you\'ve marked as done</string>
     <string name="drop_all_tasks">Drop all tasks</string>
     <string name="drops_all_tasks">Drops all current and completed tasks</string>
+    <string name="clear_all">Clear all</string>
+    <string name="back">Back</string>
+    <string name="completed_tasks">Completed tasks</string>
+    <string name="made_at_date">Made at: %1$s.%2$s</string>
+    <string name="no_completed_tasks_yet">No completed tasks yet…</string>
+    <string name="yes">Yes</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="do_you_want_to_delete_all_tasks">Do you want to delete all current and completed tasks?</string>
 </resources>

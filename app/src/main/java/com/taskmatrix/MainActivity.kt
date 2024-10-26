@@ -80,10 +80,15 @@ class MainActivity : ComponentActivity() {
                         )
                     },
                     floatingActionButton = {
-                        FloatingActionButton(onClick = {
-                            addingTask.value = true
-                        }) {
-                            Icon(imageVector = Icons.Default.Add, contentDescription = "Add")
+                        if (onMainScreen.value) {
+                            FloatingActionButton(
+                                onClick = {
+                                    addingTask.value = true
+                                },
+
+                            ) {
+                                Icon(imageVector = Icons.Default.Add, contentDescription = "Add")
+                            }
                         }
                     }
                 ) { innerPadding ->

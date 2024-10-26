@@ -48,7 +48,7 @@ fun SettingsScreen(
 
     val completedTasks = viewModel.completedTasks.collectAsState(initial = emptyList()).value
     if (completedDialogState.value)
-        ComlpetedTasksDialog(viewModel = viewModel, dialogState = completedDialogState, list = completedTasks)
+        CompletedTasksDialog(viewModel = viewModel, dialogState = completedDialogState, list = completedTasks)
 
     Column(
         modifier = Modifier
@@ -86,38 +86,37 @@ fun SettingsScreen(
                 Text(text = stringResource(R.string.drops_all_tasks))
             }
         }
-
     }
 }
 
 @Composable
-fun ComlpetedTasksDialog(
+fun CompletedTasksDialog(
     viewModel: SettingsViewModel,
     dialogState: MutableState<Boolean>,
     list: List<Task>
 ) {
-
     AlertDialog(
         onDismissRequest = { dialogState.value = false },
         confirmButton = {
-            TextButton(
-                onClick = { dialogState.value = false }
-            ) {
-                Text(text = "Back", color = Color.DarkGray)
-            }
-        },
-        dismissButton = {
             TextButton(
                 onClick = {
                     viewModel.deleteCompleted()
                     dialogState.value = false
                 }
             ) {
-                Text(text = "Clear all", color = Color.DarkGray)
+                Text(text = stringResource(R.string.clear_all), color = Color.DarkGray)
+            }
+
+        },
+        dismissButton = {
+            TextButton(
+                onClick = { dialogState.value = false }
+            ) {
+                Text(text = stringResource(R.string.back), color = Color.DarkGray)
             }
         },
         title = {
-            Text(text = "Completed tasks", color = Color.DarkGray)
+            Text(text = stringResource(R.string.completed_tasks), color = Color.DarkGray)
         },
         text = {
             if (list.isNotEmpty()) {
@@ -133,9 +132,9 @@ fun ComlpetedTasksDialog(
                                 val statusColor =
                                     if (task.urgent && task.important)
                                         colorResource(id = R.color.red)
-                                    else if (task.urgent)
+                                    else if (task.urgent && !task.important)
                                         colorResource(id = R.color.green)
-                                    else if (task.important)
+                                    else if (!task.urgent && task.important)
                                         colorResource(id = R.color.yellow)
                                     else
                                         colorResource(id = R.color.lightGray)
@@ -155,20 +154,29 @@ fun ComlpetedTasksDialog(
                                 horizontalArrangement = Arrangement.SpaceBetween
                             ) {
                                 Text(
-                                    text = "Made at: ${task.date?.date}.${task.date?.month}",
+                                    text = stringResource(
+                                        R.string.made_at_date,
+                                        task.date?.date.toString(),
+                                        task.date?.month.toString()
+                                    ),
                                     color = Color.Gray
                                 )
-                                Text(
-                                    text = "Deadline: ${task.deadline?.date}.${task.deadline?.month}",
-                                    color = Color.Gray
-                                )
+                                if (task.deadline != null) {
+                                    Text(
+                                        text = stringResource(
+                                            id = R.string.deadline,
+                                            task.deadline!!.date,
+                                            task.deadline!!.month
+                                        ),
+                                        color = Color.Gray
+                                    )
+                                }
                             }
                         }
                     }
                 }
             } else{
-                Text(text = "No completed tasks yet...")
-                // TODO: вынести в ресурс и покрасить
+                Text(text = stringResource(R.string.no_completed_tasks_yet))
             }
         }
     )
@@ -183,26 +191,26 @@ fun DropTasksAlertDialog(
         onDismissRequest = { dialogState.value = false },
         confirmButton = {
             TextButton(
-                onClick = { dialogState.value = false }
-            ) {
-                Text(text = "Yes", color = Color.DarkGray)
-            }
-        },
-        dismissButton = {
-            TextButton(
                 onClick = {
                     viewModel.deleteAll()
                     dialogState.value = false
                 }
             ) {
-                Text(text = "Cancel", color = Color.DarkGray)
+                Text(text = stringResource(R.string.yes), color = Color.DarkGray)
+            }
+        },
+        dismissButton = {
+            TextButton(
+                onClick = { dialogState.value = false }
+            ) {
+                Text(text = stringResource(id = R.string.cancel), color = Color.DarkGray)
             }
         },
         title = {
-            Text(text = "Are you sure?", color = Color.DarkGray)
+            Text(text = stringResource(R.string.are_you_sure), color = Color.DarkGray)
         },
         text = {
-            Text(text = "Do you want to delete all current and completed tasks?")
+            Text(text = stringResource(R.string.do_you_want_to_delete_all_tasks))
         }
     )
 }
