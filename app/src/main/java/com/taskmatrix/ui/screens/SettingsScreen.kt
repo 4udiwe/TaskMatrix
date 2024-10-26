@@ -3,6 +3,7 @@ package com.taskmatrix.ui.screens
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -35,7 +36,8 @@ import com.taskmatrix.viewmodel.SettingsViewModel
 
 @Composable
 fun SettingsScreen(
-    viewModel: SettingsViewModel
+    viewModel: SettingsViewModel,
+    innerPadding: PaddingValues
 ) {
 
     val dropDialogState = remember { mutableStateOf(false) }
@@ -46,10 +48,12 @@ fun SettingsScreen(
 
     val completedTasks = viewModel.completedTasks.collectAsState(initial = emptyList()).value
     if (completedDialogState.value)
-        ComlpetedTasksDialog(viewModel = viewModel, dialogState = dropDialogState, list = completedTasks)
+        ComlpetedTasksDialog(viewModel = viewModel, dialogState = completedDialogState, list = completedTasks)
 
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(innerPadding)
     ) {
         Card(
             modifier = Modifier
@@ -77,9 +81,6 @@ fun SettingsScreen(
             Column(
                 modifier = Modifier
                     .padding(horizontal = 16.dp, vertical = 10.dp)
-                    .clickable {
-
-                    }
             ) {
                 Text(text = stringResource(R.string.drop_all_tasks), fontSize = 20.sp)
                 Text(text = stringResource(R.string.drops_all_tasks))
@@ -107,9 +108,11 @@ fun ComlpetedTasksDialog(
         },
         dismissButton = {
             TextButton(
-                onClick = { dialogState.value = false }
+                onClick = {
+                    viewModel.deleteCompleted()
+                    dialogState.value = false
+                }
             ) {
-                viewModel.deleteCompleted()
                 Text(text = "Clear all", color = Color.DarkGray)
             }
         },
@@ -117,50 +120,55 @@ fun ComlpetedTasksDialog(
             Text(text = "Completed tasks", color = Color.DarkGray)
         },
         text = {
-            LazyColumn {
-                items(list) { task ->
-                    Column(
-                        modifier = Modifier.padding(vertical = 2.dp)
-                    ) {
-                        Row (
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ){
-                            val statusColor =
-                                if (task.urgent && task.important)
-                                    colorResource(id = R.color.red)
-                                else if (task.urgent)
-                                    colorResource(id = R.color.green)
-                                else if (task.important)
-                                    colorResource(id = R.color.yellow)
-                                else
-                                    colorResource(id = R.color.lightGray)
-
-                            Icon(
-                                painter = painterResource(id = R.drawable.circle),
-                                contentDescription = "circle",
-                                tint = statusColor,
-                                modifier = Modifier
-                                    .padding(end = 8.dp)
-                                    .size(14.dp)
-                            )
-                            Text(text = task.title, color = Color.DarkGray)
-                        }
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
+            if (list.isNotEmpty()) {
+                LazyColumn {
+                    items(list) { task ->
+                        Column(
+                            modifier = Modifier.padding(vertical = 2.dp)
                         ) {
-                            Text(
-                                text = "Made at: ${task.date?.date}.${task.date?.month}",
-                                color = Color.Gray
-                            )
-                            Text(
-                                text = "Deadline: ${task.deadline?.date}.${task.deadline?.month}",
-                                color = Color.Gray
-                            )
+                            Row (
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ){
+                                val statusColor =
+                                    if (task.urgent && task.important)
+                                        colorResource(id = R.color.red)
+                                    else if (task.urgent)
+                                        colorResource(id = R.color.green)
+                                    else if (task.important)
+                                        colorResource(id = R.color.yellow)
+                                    else
+                                        colorResource(id = R.color.lightGray)
+
+                                Icon(
+                                    painter = painterResource(id = R.drawable.circle),
+                                    contentDescription = "circle",
+                                    tint = statusColor,
+                                    modifier = Modifier
+                                        .padding(end = 8.dp)
+                                        .size(14.dp)
+                                )
+                                Text(text = task.title, color = Color.DarkGray)
+                            }
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Text(
+                                    text = "Made at: ${task.date?.date}.${task.date?.month}",
+                                    color = Color.Gray
+                                )
+                                Text(
+                                    text = "Deadline: ${task.deadline?.date}.${task.deadline?.month}",
+                                    color = Color.Gray
+                                )
+                            }
                         }
                     }
                 }
+            } else{
+                Text(text = "No completed tasks yet...")
+                // TODO: вынести в ресурс и покрасить
             }
         }
     )
