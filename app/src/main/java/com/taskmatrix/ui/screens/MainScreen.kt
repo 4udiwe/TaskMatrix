@@ -172,7 +172,7 @@ fun MatrixCard(
                                     .atStartOfDay()
                             ).toDays().toInt()
                             val deadlineColor = when (daysRemaining) {
-                                1 -> colorResource(id = R.color.deadline)
+                                in -100..1 -> colorResource(id = R.color.deadline)
                                 in 2..3 -> colorResource(id = R.color.closeDeadline)
                                 in 4..7 -> colorResource(id = R.color.midDeadline)
                                 else -> colorResource(id = R.color.farDeadline)
@@ -180,7 +180,12 @@ fun MatrixCard(
                             Row(
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Text(text = stringResource(R.string.in_d, daysRemaining))
+                                Text(
+                                    text = if (daysRemaining > 0) stringResource(
+                                        R.string.in_d,
+                                        daysRemaining
+                                    ) else stringResource(R.string.deadline_passed)
+                                )
                                 Icon(
                                     painter = painterResource(id = R.drawable.circle),
                                     contentDescription = "circle",
