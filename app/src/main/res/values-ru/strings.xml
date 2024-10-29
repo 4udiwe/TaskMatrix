@@ -33,4 +33,5 @@
     <string name="are_you_sure">Вы уверены?</string>
     <string name="do_you_want_to_delete_all_tasks">Вы хотите удалить все текущие и завершенные задачи?</string>
     <string name="deadline_passed">дедлайн прошел</string>
+    <string name="deadline_today">сегодня</string>
 </resources>

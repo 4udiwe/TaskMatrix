@@ -31,7 +31,9 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
@@ -47,9 +49,12 @@ import androidx.compose.ui.unit.sp
 import com.example.domain.model.Task
 import com.maxkeppeker.sheets.core.models.base.rememberSheetState
 import com.maxkeppeler.sheets.calendar.CalendarDialog
+import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
+import com.maxkeppeler.sheets.calendar.models.CalendarTimeline
 import com.taskmatrix.viewmodel.MainViewModel
 import com.taskmatrix.R
+import kotlinx.coroutines.delay
 import java.time.Duration
 import java.time.LocalDate
 import java.time.ZoneId
@@ -184,7 +189,10 @@ fun MatrixCard(
                                     text = if (daysRemaining > 0) stringResource(
                                         R.string.in_d,
                                         daysRemaining
-                                    ) else stringResource(R.string.deadline_passed)
+                                    ) else if (daysRemaining == 0)
+                                        stringResource(R.string.deadline_today)
+                                    else
+                                        stringResource(R.string.deadline_passed)
                                 )
                                 Icon(
                                     painter = painterResource(id = R.drawable.circle),
@@ -221,6 +229,7 @@ fun AddTaskDialog(
     today: Date
 ) {
     val title = remember { mutableStateOf("") }
+    val titleEmptyError = remember { mutableStateOf(false) }
     val description = remember { mutableStateOf("") }
     val deadline: MutableState<Date?> = remember { mutableStateOf(null) }
     val isUrgent = remember { mutableStateOf(true) }
@@ -232,6 +241,10 @@ fun AddTaskDialog(
         if (deadline.value == null) addingDeadline.value = false
     })
 
+    LaunchedEffect(key1 = titleEmptyError.value) {
+        delay(3000)
+        titleEmptyError.value = false
+    }
 
     AlertDialog(
         modifier = Modifier,
@@ -240,17 +253,21 @@ fun AddTaskDialog(
         },
         confirmButton = {
             TextButton(onClick = {
-                viewModel.addTask(
-                    Task(
-                        title = title.value,
-                        description = description.value,
-                        date = today,
-                        deadline = deadline.value,
-                        urgent = isUrgent.value,
-                        important = isImportant.value
+                if (title.value.isEmpty())
+                    titleEmptyError.value = true
+                else {
+                    viewModel.addTask(
+                        Task(
+                            title = title.value,
+                            description = description.value,
+                            date = today,
+                            deadline = deadline.value,
+                            urgent = isUrgent.value,
+                            important = isImportant.value
+                        )
                     )
-                )
-                dialogState.value = false
+                    dialogState.value = false
+                }
             }) {
                 Text(text = stringResource(R.string.add))
             }
@@ -271,7 +288,8 @@ fun AddTaskDialog(
                     modifier = Modifier.padding(vertical = 4.dp),
                     value = title.value,
                     onValueChange = { title.value = it },
-                    label = { Text(text = stringResource(R.string.title)) }
+                    label = { Text(text = stringResource(R.string.title)) },
+                    isError = titleEmptyError.value
                 )
                 if (!addingDescription.value) {
                     TextButton(onClick = { addingDescription.value = true }) {
@@ -371,6 +389,7 @@ fun AddTaskDialog(
         selection = CalendarSelection.Date { date ->
             deadline.value = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant())
         },
+        config = CalendarConfig(disabledTimeline = CalendarTimeline.PAST)
     )
 }
 
