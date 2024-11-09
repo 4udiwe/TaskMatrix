@@ -8,7 +8,7 @@ TaskMatrix - приложение таск-трекер для создания 
 <details>
   <summary>Матрица Эйзенхауэра</summary>
 
-  ![matrix](pictures/matrix)
+  ![matrix](pictures/matrix.png)
 </details>
 
 Данное упорядочивание позволяет более четко расставить приоритеты и оптимизировать рабочий процесс.
@@ -26,9 +26,9 @@ Kotlin, Jetpack Compose, Room, Koin, Coroutines, Compose Navigation.
 <details>
   <summary>Скриншоты</summary>
 
-  ![screen1](pictures/screen1)
-  ![screen2](pictures/screen2)
-  ![screen3](pictures/screen3)
-  ![screen4](pictures/screen4)
-  ![screen5](pictures/screen5)
+  ![screen1](pictures/screen1.jpg)
+  ![screen2](pictures/screen2.jpg)
+  ![screen3](pictures/screen3.jpg)
+  ![screen4](pictures/screen4.jpg)
+  ![screen5](pictures/screen5.jpg)
 </details>
