@@ -8,7 +8,7 @@ TaskMatrix - приложение таск-трекер для создания 
 <details>
   <summary>Матрица Эйзенхауэра</summary>
 
-  ![matrix]([pictures/1.jpg](https://services.kontur.ru/Files/Modules/Article/articles-5207i/7b92ed82-f753-4873-bff0-a92cdf53f4d4.png?t=1532612095))
+  ![matrix](pictures/matrix)
 </details>
 
 Данное упорядочивание позволяет более четко расставить приоритеты и оптимизировать рабочий процесс.
@@ -22,3 +22,13 @@ TaskMatrix - приложение таск-трекер для создания 
 Используются паттерны репозиторий и MVVM.
 # Стек проекта
 Kotlin, Jetpack Compose, Room, Koin, Coroutines, Compose Navigation.
+#Скриншоты приложения
+<details>
+  <summary>Скриншоты</summary>
+
+  ![screen1](pictures/screen1)
+  ![screen2](pictures/screen2)
+  ![screen3](pictures/screen3)
+  ![screen4](pictures/screen4)
+  ![screen5](pictures/screen5)
+</details>
