@@ -22,7 +22,7 @@ TaskMatrix - приложение таск-трекер для создания 
 Используются паттерны репозиторий и MVVM.
 # Стек проекта
 Kotlin, Jetpack Compose, Room, Koin, Coroutines, Compose Navigation.
-#Скриншоты приложения
+# Скриншоты приложения
 <details>
   <summary>Скриншоты</summary>
 
