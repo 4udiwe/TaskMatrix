@@ -52,17 +52,18 @@ android {
 
 dependencies {
 
+    //modules
     implementation(project(":domain"))
     implementation(project(":data"))
-
+    //koin
     implementation("io.insert-koin:koin-android:4.0.0")
-
+    //room db
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
-
+    //calendar dialog
     implementation ("com.maxkeppeler.sheets-compose-dialogs:core:1.0.2")
     implementation ("com.maxkeppeler.sheets-compose-dialogs:calendar:1.0.2")
-
+    //compose navigation
     implementation(libs.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
 
